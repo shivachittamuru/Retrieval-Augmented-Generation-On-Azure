@@ -1,4 +1,4 @@
-azure-search-documents==11.4.0b3
+azure-search-documents
 plotly
 scikit-learn
 # azure-ai-formrecognizer --pre --upgrade
