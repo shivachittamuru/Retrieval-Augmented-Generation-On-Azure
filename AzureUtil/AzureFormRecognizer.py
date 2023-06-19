@@ -24,6 +24,15 @@ class AzureFormRecognizerLayout:
                 not_completed=False
         result = poller.result()
         return result
+    
+    def extract_content_from_url(self,document_url):
+        """Returns the text content of the file at the given URL."""
+        #print("Analyzing", document_url)
+        
+        poller = self.document_analysis_client.begin_analyze_document_from_url(
+            "prebuilt-layout", document_url)
+        result = poller.result()
+        return result
 
     def extract_files(self, folder_name: str, destination_folder_name: str):
         os.makedirs(destination_folder_name, exist_ok=True)
@@ -37,10 +46,10 @@ class AzureFormRecognizerLayout:
                 output_file = os.path.join(destination_folder_name, file[:-3] +'json')
                 print(f'  write output to {output_file}')
                 with open(output_file, "w") as f:
-                    f.write(json.dumps(page_content, indent=4))
+                    f.write(json.dumps({'filename':file_name, 'content':page_content}, indent=4))
 
-
-    def get_page_content(self,file_name:str, result):
+    # This method is more suitable for "read" api
+    def get_page_content(self, result):
         page_content = []
         for page in result.pages:
 
@@ -50,7 +59,7 @@ class AzureFormRecognizerLayout:
             page_content.append({'page_number':page.page_number, 
                                     'page_content':' '.join(all_lines_content)})
 
-        return {'filename':file_name, 'content':page_content}
+        return page_content
     
     def table_to_html(self, table):
         table_html = "<table>"
@@ -98,8 +107,7 @@ class AzureFormRecognizerLayout:
 
             page_text += " "
             page_map.append((page_num, offset, page_text))
-            offset += len(page_text)
-            
+            offset += len(page_text)            
         return page_map
 
     def _get_azure_container(self, blob_service_client, container_name:str):

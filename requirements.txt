@@ -1,14 +1,23 @@
 azure-search-documents==11.4.0b3
 azure-ai-formrecognizer==3.2.1
+azure-storage-blob==12.16.0
+azure-identity==1.13.0b4
 python-dotenv==1.0.0
 num2words==0.5.12
 openai==0.27.2
 pdfminer==20191125
 plotly==5.10.0
 tiktoken==0.4.0
+pypdf==3.10.0
 scikit-learn
 pandas
 langchain
 tenacity
 streamlit
+
+unstructured
+scikit-learn
+matplotlib
+plotly
+
 
