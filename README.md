@@ -18,7 +18,7 @@ This [end-to-end notebook](end-to-end-RAG.ipynb) covers all the concepts of RAG:
 **Note:** Update the credentials of your Azure resources in the ``.env`` file
 
 
-**Tutorials:**
+### **Tutorials:**
 * [RAG for structured data on Azure](tutorial1-RAG_structured_with_cognitive_search.ipynb)
 * [RAG for unstructured data on Azure](tutorial2-RAG_unstructured_with_cognitive_search.ipynb)
 
