@@ -12,12 +12,15 @@ pypdf==3.10.0
 scikit-learn
 pandas
 langchain
-tenacity
-streamlit
-
 unstructured
+faiss-cpu
 scikit-learn
 matplotlib
 plotly
+tenacity
+streamlit
+pinecone-client
+wikipedia
+pypdf
 
 
