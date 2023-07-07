@@ -10,7 +10,7 @@ RAG aims to overcome limitations found in purely generative models, including is
 
 ## Description
 
-This [end-to-end notebook](end-to-end-RAG.ipynb) covers all the concepts of RAG:
+This [end-to-end notebook](notebooks/end-to-end-RAG.ipynb) covers all the concepts of RAG:
   * **Process:** Use Azure Form Recognizer to convert unstructured data from raw documents (stored in Azure Blob Storage container) to a more structured JSON format that can be indexed in Azure Cognitive Search.
   * **Retrieve:** Use Azure Cognitive Search to create an index of documents and search/retrieve relevant contextual information based on the user questions.
   * **Generate:** Use Azure OpenAI service to generate answers to user questions by using the retrieved information in the prompts.
@@ -19,8 +19,8 @@ This [end-to-end notebook](end-to-end-RAG.ipynb) covers all the concepts of RAG:
 
 
 ### **Tutorials:**
-* [RAG for structured data on Azure](tutorial1-RAG_structured_with_cognitive_search.ipynb)
-* [RAG for unstructured data on Azure](tutorial2-RAG_unstructured_with_cognitive_search.ipynb)
+* [RAG for structured data on Azure](notebooks/tutorials/tutorial1-RAG_structured_with_cognitive_search.ipynb)
+* [RAG for unstructured data on Azure](notebooks/tutorials/tutorial2-RAG_unstructured_with_cognitive_search.ipynb)
 
 
 
