@@ -3,6 +3,13 @@ import os
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores.azuresearch import AzureSearch
 
+from azure.core.credentials import AzureKeyCredential
+from azure.search.documents.indexes import SearchIndexClient
+
+service_endpoint = os.environ['AZURE_COGNITIVE_SEARCH_ENDPOINT']
+key = os.environ['AZURE_COGNITIVE_SEARCH_KEY']
+
+client = SearchIndexClient(service_endpoint, AzureKeyCredential(key))
 
 # loading PDF, DOCX and TXT files as LangChain Documents
 def load_document(file_path):
@@ -49,8 +56,8 @@ def create_embeddings(chunks):
     vector_store.add_documents(documents=chunks)
     return vector_store
 
-# del delete_index(index_name="langchain-streamlit-rag-demo"):
-
+def delete_index(index_name="langchain-streamlit-rag-demo"):
+    client.delete_index(index_name)
 
 def ask_and_get_answer(vector_store, question, k=3):
     from langchain.chains import RetrievalQA
@@ -142,16 +149,18 @@ if __name__ == "__main__":
         # add data button widget
         add_data = st.button('Add Data', on_click=clear_history)
 
-        if uploaded_file and add_data: # if the user browsed a file
-            with st.spinner('Reading, chunking and embedding file ...'):
-
-                
+        if uploaded_file and add_data: # if the user uploaded a file and clicked the add data button       
+            # delete the index if it exists to avoid duplicate index error
+            for index in client.list_index_names():
+                if index=="langchain-streamlit-rag-demo":                           
+                    delete_index(index)
+            
+            with st.spinner('Reading, chunking and embedding file ...'):                
                 # # writing the file from RAM to the current directory on disk
                 # bytes_data = uploaded_file.read()
                 # file_name = os.path.join(f"{path}\\uploaded-files", uploaded_file.name)
                 # with open(file_name, 'wb') as f:
-                #     f.write(bytes_data)
-                    
+                #     f.write(bytes_data)                    
                                                     
                 path = os.getcwd()
                 # data = load_document(f"{path}\\files\state_of_the_union.txt")
