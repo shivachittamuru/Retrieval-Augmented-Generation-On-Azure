@@ -22,5 +22,6 @@ streamlit
 pinecone-client
 wikipedia
 pypdf
+# chromadb 
 
 
